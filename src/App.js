@@ -1,24 +1,43 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import "./firebase";
+
 import logo from './logo.svg';
 import './App.css';
+import Setup from "./screens/Setup";
+import Home from "./screens/Home";
+import Invite from "./screens/Invite";
+import {Play} from "./screens/Play";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>Trivia Town</h1>
+        </header>
+        <Switch>
+          <Route path="/setup">
+            <Setup />
+          </Route>
+          <Route path="/invite/:companyId">
+            <Invite />
+          </Route>
+          <Route path="/play/:companyId">
+            <Play />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
