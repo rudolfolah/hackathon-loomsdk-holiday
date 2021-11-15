@@ -24,7 +24,8 @@ function App() {
         </header>
         <Switch>
           <Route path="/setup">
-            <Setup />
+            {/*<Setup baseUrl={"triviatown-123.s3bucket.example.org"} />*/}
+            <Setup baseUrl={"localhost:3000"} />
           </Route>
           <Route path="/invite/:companyId">
             <Invite />

@@ -18,9 +18,40 @@ export async function createCompanyData() {
   const doc = await addDoc(companiesCollection, {
     "question-1": {
       "loomVideoId": null,
-    }
+      "text": "What is the capital city of Canada?",
+      "correctAnswer": "Ottawa",
+      "incorrectAnswers": [
+        "Toronto",
+        "Vancouver",
+        "Montreal",
+      ],
+    },
+    "question-2": {
+      "loomVideoId": null,
+      "text": "Where is the Sea of Tranquility located?",
+      "correctAnswer": "The Moon",
+      "incorrectAnswers": [
+        "Mars",
+        "Earth",
+        "Jupiter",
+      ],
+    },
+    "question-3": {
+      "loomVideoId": null,
+      "text": "Question?",
+      "correctAnswer": "Correct answer",
+      "incorrectAnswers": [
+        "Wrong",
+        "Incorrect",
+        "Not correct",
+      ],
+    },
   });
   return doc.id;
+}
+
+export async function createPlayerData(companyId) {
+
 }
 
 export async function getCompanyData(companyId) {
@@ -28,7 +59,6 @@ export async function getCompanyData(companyId) {
   const docSnapshot = await getDoc(docRef);
   if (!docSnapshot.exists()) {
     throw new Error(`company id does not exist: ${companyId}`);
-
   }
   return docSnapshot.data();
 }
