@@ -1,7 +1,7 @@
-export function Prompt() {
+export function Prompt({ question }) {
   return (
     <div>
-      <h2>What is the capital of Canada?</h2>
+      <h2>question</h2>
     </div>
   );
 }

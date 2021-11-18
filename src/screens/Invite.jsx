@@ -1,22 +1,81 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 import loomSettings from "../loom-settings.png";
 import LoomRecord from "../components/LoomRecord";
 import {Prompt} from "../components/Prompt";
+import {getCompanyData, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
+
+const QUESTIONS_NOT_LOADED = 0;
+const ALL_QUESTIONS_RECORDED = -1;
 
 const Invite = () => {
   const { companyId } = useParams();
-  const [showPrompt, setShowPrompt] = useState();
-  const handleStart = () => {
+  const [questionId, setQuestionId] = useState(QUESTIONS_NOT_LOADED);
+  const [companyData, setCompanyData] = useState();
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [showCompletedMessage, setShowCompletedMessage] = useState(false);
+
+  useEffect(() => {
+    async function retrieveQuestion() {
+      const companyData = await getCompanyData(companyId);
+      setCompanyData(companyData);
+      for (let key of Object.keys(companyData)) {
+        if (companyData[key].loomVideoId === null) {
+          setQuestionId(key);
+          return;
+        }
+      }
+      setQuestionId(ALL_QUESTIONS_RECORDED);
+    }
+    retrieveQuestion();
+  }, [questionId, companyId]);
+
+  const handleRecordingStarted = () => {
     console.log("started recording");
     setShowPrompt(true);
   };
-  const handleComplete = () => {
+
+  const handleRecordingCanceled = () => {
+    console.log("canceled recording");
+    setShowPrompt(false);
+  }
+
+  const handleRecordingCompleted = (loomVideoSharedUrl) => {
     console.log("finished recording");
+    setCompanyQuestionLoomVideoSharedUrl(
+      companyId,
+      questionId,
+      loomVideoSharedUrl
+    ).then(() => {
+      setShowCompletedMessage(true);
+    });
   };
+
+  if (companyData && questionId === ALL_QUESTIONS_RECORDED) {
+    return (
+      <div>
+        <div>
+          <h3>Sorry!</h3>
+          <p>All questions have been recorded already, thank you!</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showCompletedMessage) {
+    return (
+      <div>
+        <div>
+          <h3>Thank you!</h3>
+          <p>Thank you so much for recording a video for the Trivia Town game!</p>
+        </div>
+      </div>
+    );
+  }
+
   if (showPrompt) {
-    return (<Prompt />);
+    return (<Prompt question={companyData[questionId].text} />);
   }
 
   return (
@@ -26,7 +85,15 @@ const Invite = () => {
       <p>You have been invited by someone at your organization to record a video!</p>
       <p>Below is a prompt for a question or answer in the trivia game</p>
       <ol>
-        <li>Click here to start recording: <LoomRecord label={"Start"} onStart={handleStart} onComplete={handleComplete} /></li>
+        <li>
+          Click here to start recording:
+          <LoomRecord
+            label={"Start"}
+            onCancel={handleRecordingCanceled}
+            onComplete={handleRecordingCompleted}
+            onStart={handleRecordingStarted}
+          />
+        </li>
         <li>
           Configure the recording settings to <em>capture the camera only</em>
           <img alt="Settings to use for Loom recording" src={loomSettings} />

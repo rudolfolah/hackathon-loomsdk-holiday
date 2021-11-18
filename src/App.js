@@ -2,25 +2,24 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import "./firebase";
 
-import logo from './logo.svg';
 import './App.css';
 import Setup from "./screens/Setup";
 import Home from "./screens/Home";
 import Invite from "./screens/Invite";
 import {Play} from "./screens/Play";
+import headerImage from "./header.png";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Trivia Town</h1>
+            <img alt="" src={headerImage} />
         </header>
         <Switch>
           <Route path="/setup">

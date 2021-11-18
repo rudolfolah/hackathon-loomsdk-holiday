@@ -1,13 +1,10 @@
 import { setup, isSupported } from "@loomhq/loom-sdk";
-import { oembed } from "@loomhq/loom-embed";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const API_KEY = "639a4278-5bdb-456a-b4dc-b7e48cfccaa3";
 const BUTTON_ID = "loom-sdk-button";
 
-export default function LoomRecord({ label, onStart, onComplete }) {
-  const [videoHTML, setVideoHTML] = useState("");
-
+export default function LoomRecord({ label, onCancel, onComplete, onStart }) {
   useEffect(() => {
     async function setupLoom() {
       const { supported, error } = await isSupported();
@@ -17,9 +14,7 @@ export default function LoomRecord({ label, onStart, onComplete }) {
         return;
       }
 
-      const button = document.getElementById(BUTTON_ID);
-
-      if (!button) {
+      if (!document.getElementById(BUTTON_ID)) {
         return;
       }
 
@@ -27,24 +22,23 @@ export default function LoomRecord({ label, onStart, onComplete }) {
         apiKey: API_KEY
       });
 
-      const sdkButton = configureButton({ element: button });
-
-      sdkButton.on("insert-click", async video => {
-        const { html } = await oembed(video.sharedUrl, { width: 400 });
-        setVideoHTML(html);
-      });
-
-      sdkButton.on("start", () => { onStart(); });
-      sdkButton.on("complete", () => { onComplete() });
+      return configureButton;
     }
 
-    setupLoom();
-  }, [onStart, onComplete]);
+    setupLoom().then(configureButton => {
+      const sdkButton = configureButton({ element: document.getElementById(BUTTON_ID) });
+
+      sdkButton.on("insert-click", async video => {
+        onComplete(video.sharedUrl);
+      });
+
+      // see: https://dev.loom.com/docs/record-sdk/api#buttonemitterevents
+      sdkButton.on("cancel", () => { onCancel(); });
+      sdkButton.on("start", () => { onStart(); });
+    });
+  }, [onCancel, onComplete, onStart]);
 
   return (
-    <>
-      <button id={BUTTON_ID}>{label}</button>
-      <div dangerouslySetInnerHTML={{ __html: videoHTML }}></div>
-    </>
+    <button id={BUTTON_ID}>{label}</button>
   );
 }

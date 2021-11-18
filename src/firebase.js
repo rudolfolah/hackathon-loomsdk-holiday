@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, doc, setDoc, addDoc, getDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, doc, addDoc, getDoc, updateDoc } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_ZCw0h8pHxRFFYOGHhoSoLz45L9rIT-g",
@@ -48,6 +48,13 @@ export async function createCompanyData() {
     },
   });
   return doc.id;
+}
+
+export async function setCompanyQuestionLoomVideoSharedUrl(companyId, questionId, loomVideoSharedUrl) {
+  const docRef = doc(db, "companies", companyId);
+  return updateDoc(docRef, {
+    [`${questionId}.loomVideoId`]: loomVideoSharedUrl
+  });
 }
 
 export async function createPlayerData(companyId) {

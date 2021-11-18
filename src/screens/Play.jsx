@@ -1,38 +1,45 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getCompanyData} from "../firebase";
+import {LoomVideo} from "../components/LoomVideo";
+
+const QUESTIONS_NOT_LOADED = 0;
 
 export function Play() {
   const { companyId } = useParams();
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [questionId, setQuestionId] = useState(QUESTIONS_NOT_LOADED);
   const [companyData, setCompanyData] = useState();
   useEffect(() => {
-    if (currentQuestion === 0) {
-      return;
-    }
     async function retrieveQuestion() {
       const companyData = await getCompanyData(companyId);
       console.log(companyData);
       setCompanyData(companyData);
+      for (let key of Object.keys(companyData)) {
+        if (companyData[key].loomVideoId !== null) {
+          setQuestionId(key);
+          return;
+        }
+      }
+      setQuestionId(QUESTIONS_NOT_LOADED);
     }
     retrieveQuestion();
-  }, [currentQuestion, companyId]);
-  const handleStart = () => {
-    setCurrentQuestion(1);
-  };
-  if (companyData && currentQuestion > 0) {
-    return (
-      <div>
-        <div>
-          <h3>{companyData[`question-${currentQuestion}`].text}</h3>
-        </div>
-      </div>
-    )
+  }, [questionId, companyId]);
+
+  if (questionId === QUESTIONS_NOT_LOADED) {
+    return null;
   }
+
   return (
     <div>
-      <p>Welcome to Trivia Town! Compete with your coworkers in a fun trivia game!</p>
-      <p>Click <button onClick={handleStart}>Start</button> to begin!</p>
+      <div>
+        <p>Welcome to Trivia Town! Compete with your coworkers in a fun trivia game!</p>
+      </div>
+      <div>
+        <h3>{companyData[questionId].text}</h3>
+        <div>
+          <LoomVideo loomVideoSharedUrl={companyData[questionId].loomVideoId} />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
