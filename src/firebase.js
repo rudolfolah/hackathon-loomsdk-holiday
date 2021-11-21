@@ -57,8 +57,11 @@ export async function setCompanyQuestionLoomVideoSharedUrl(companyId, questionId
   });
 }
 
-export async function createPlayerData(companyId) {
+export async function createPlayerData(companyId, name) {
+}
 
+export async function setPlayerAnswer(playerId, questionId, answer) {
+  const docRef = doc(db, "plays", playerId)
 }
 
 export async function getCompanyData(companyId) {

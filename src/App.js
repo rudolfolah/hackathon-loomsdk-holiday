@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import "./firebase";
-
+import 'animate.css';
 import './App.css';
 import Setup from "./screens/Setup";
 import Home from "./screens/Home";
@@ -19,7 +19,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-            <img alt="" src={headerImage} />
+            <img height="300" alt="" src={headerImage} />
         </header>
         <Switch>
           <Route path="/setup">
