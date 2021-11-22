@@ -6,6 +6,8 @@ import LoomRecord from "../components/LoomRecord";
 import {Prompt} from "../components/Prompt";
 import {getCompanyData, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
 
+import "./Invite.css";
+
 const QUESTIONS_NOT_LOADED = 0;
 const ALL_QUESTIONS_RECORDED = -1;
 
@@ -84,6 +86,38 @@ const Invite = () => {
       <p>Trivia Town is a fun way for your organization to interact remotely. It is powered by Loom.</p>
       <p>You have been invited by someone at your organization to record a video!</p>
       <p>Below is a prompt for a question or answer in the trivia game</p>
+      <div className="Invite--section-heading">
+        Get Busy Recording!
+      </div>
+      <div className="Invite--steps-container">
+        <div className="Invite--step">
+          <div className="Invite--step-label">
+            Step 1
+          </div>
+          <div className="Invite--step-description">
+            <p>Click here to start recording:</p>
+            <p>
+              <LoomRecord
+                label={"Start"}
+                onCancel={handleRecordingCanceled}
+                onComplete={handleRecordingCompleted}
+                onStart={handleRecordingStarted}
+              />
+            </p>
+          </div>
+        </div>
+        <div className="Invite--step">
+          <div className="Invite--step-label">
+            Step 2
+          </div>
+          <div className="Invite--step-description">
+            <p>Configure the recording settings to <em>capture the camera only</em></p>
+            <p>
+              <img alt="Settings to use for Loom recording" src={loomSettings} />
+            </p>
+          </div>
+        </div>
+      </div>
       <ol>
         <li>
           Click here to start recording:

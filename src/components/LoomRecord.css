@@ -1,0 +1,11 @@
+.LoomRecord--button {
+    background: #0094D4;
+    border: 1px solid #0094D4;
+    border-radius: 5px;
+    padding: 32px;
+    margin: 5px;
+    font-size: 32pt;
+    font-family: 'Fredoka One', sans-serif;
+    color: #FFDE59;
+    cursor: pointer;
+}

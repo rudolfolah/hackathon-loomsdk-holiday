@@ -1,6 +1,8 @@
 import { setup, isSupported } from "@loomhq/loom-sdk";
 import { useEffect } from "react";
 
+import "./LoomRecord.css";
+
 const API_KEY = "639a4278-5bdb-456a-b4dc-b7e48cfccaa3";
 const BUTTON_ID = "loom-sdk-button";
 
@@ -39,6 +41,8 @@ export default function LoomRecord({ label, onCancel, onComplete, onStart }) {
   }, [onCancel, onComplete, onStart]);
 
   return (
-    <button id={BUTTON_ID}>{label}</button>
+    <button id={BUTTON_ID} className={"LoomRecord--button animate__animated animate__flip"}>
+      {label}
+    </button>
   );
 }

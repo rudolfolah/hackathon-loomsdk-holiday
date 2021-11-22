@@ -1,0 +1,40 @@
+.Invite--section-heading {
+    border-top: 2px dotted #0094D4;
+    border-bottom: 2px dotted #0094D4;
+    color: #0094D4;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 28pt;
+    text-align: center;
+    margin: 24pt;
+    padding: 12pt 0;
+}
+
+.Invite--steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Invite--step {
+    border: 2px solid #FFDE59;
+    display: inline-flex;
+    flex-direction: row;
+    border-radius: 12px;
+    margin-bottom: 20pt;
+}
+
+.Invite--step-label {
+    color: #CB6CE6;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 32pt;
+    padding: 4pt;
+    margin: 16pt;
+}
+
+.Invite--step-description {
+    border-left: 2px solid #FFDE59;
+    color: #CB6CE6;
+    font-family: Lato, sans-serif;
+    font-size: 18pt;
+    padding: 8pt;
+}
