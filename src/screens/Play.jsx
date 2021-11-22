@@ -1,20 +1,23 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import { shuffle } from "lodash";
-import {getCompanyData} from "../firebase";
+import * as firebaseApi from "../firebase";
 import {LoomVideo} from "../components/LoomVideo";
 
 import "./Play.css";
+import Leaderboard from "../components/Leaderboard";
 
 export function Play() {
   const { companyId } = useParams();
   const [unconfirmedPlayerName, setUnconfirmedPlayerName] = useState("");
   const [playerName, setPlayerName] = useState();
+  const [playerId, setPlayerId] = useState();
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
   useEffect(() => {
     async function retrieveQuestion() {
-      const companyData = await getCompanyData(companyId);
+      const companyData = await firebaseApi.getCompanyData(companyId);
       console.log(companyData);
       let questionsAndAnswersData = [];
       for (let key of Object.keys(companyData)) {
@@ -31,6 +34,7 @@ export function Play() {
     }
     retrieveQuestion();
   }, [companyId]);
+
   useEffect(() => {
     if (playerName === undefined || playerName === null) {
       return;
@@ -44,7 +48,17 @@ export function Play() {
     }
   }, [playerName]);
 
-  const handleAnswerClick = (question, answer) => {
+  const handleAnswerClick = (answer) => {
+    const updatedQuestionsAndAnswers = [...questionsAndAnswers];
+    updatedQuestionsAndAnswers[currentQuestionIndex].answer = answer;
+    firebaseApi.setPlayerAnswer(
+      playerId,
+      questionsAndAnswers[currentQuestionIndex].question.id,
+      questionsAndAnswers[currentQuestionIndex].question.correctAnswer === answer
+    ).then(() => {
+      setQuestionsAndAnswers(updatedQuestionsAndAnswers);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    });
   };
 
   const handleChangeUnconfirmedPlayerName = (event) => {
@@ -52,8 +66,11 @@ export function Play() {
   };
 
   const savePlayerName = () => {
-    setPlayerName(unconfirmedPlayerName);
-    setUnconfirmedPlayerName("");
+    firebaseApi.createPlayerData(companyId, unconfirmedPlayerName).then(playerId => {
+      setPlayerName(unconfirmedPlayerName);
+      setUnconfirmedPlayerName("");
+      setPlayerId(playerId);
+    });
   };
 
   if (questionsAndAnswers.length === 0) {
@@ -83,8 +100,20 @@ export function Play() {
             Start the Game!
           </button>
         </div>
+        <Leaderboard />
       </div>
     )
+  }
+
+  if (currentQuestionIndex === questionsAndAnswers.length) {
+    return (
+      <div className="Play--container">
+        <div className="Play--header">
+          <p>Thanks for playing Trivia Town!</p>
+        </div>
+        <Leaderboard />
+      </div>
+    );
   }
 
   const currentQuestion = questionsAndAnswers[currentQuestionIndex].question;
@@ -109,7 +138,7 @@ export function Play() {
             <div
               className="Play--answer-item"
               key={`answer-${answer}`}
-              onClick={() => handleAnswerClick(currentQuestion, answer)}
+              onClick={() => handleAnswerClick(answer)}
             >
               {answer}
             </div>

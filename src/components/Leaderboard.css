@@ -1,0 +1,29 @@
+.Leaderboard--container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Leaderboard--header {
+
+}
+
+.Leaderboard--content {
+
+}
+
+.Leaderboard--line {
+    display: flex;
+    flex-direction: row;
+    font-size: 16pt;
+}
+
+.Leaderboard--line-place {
+    flex-basis: 30%;
+}
+
+.Leaderboard--line-name {
+    flex-basis: 50%;
+}
+
+.Leaderboard--line-score {
+}

@@ -58,10 +58,22 @@ export async function setCompanyQuestionLoomVideoSharedUrl(companyId, questionId
 }
 
 export async function createPlayerData(companyId, name) {
+  const playersCollection = collection(db, "players");
+  const doc = await addDoc(playersCollection, {
+    "companyId": companyId,
+    "name": name,
+    "question-1": null,
+    "question-2": null,
+    "question-3": null
+  });
+  return doc.id;
 }
 
-export async function setPlayerAnswer(playerId, questionId, answer) {
-  const docRef = doc(db, "plays", playerId)
+export async function setPlayerAnswer(playerId, questionId, answerIsCorrect) {
+  const docRef = doc(db, "players", playerId);
+  return updateDoc(docRef, {
+    [`${questionId}`]: answerIsCorrect
+  });
 }
 
 export async function getCompanyData(companyId) {
