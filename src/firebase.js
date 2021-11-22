@@ -1,5 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, addDoc, getDoc, updateDoc } from 'firebase/firestore/lite';
+import {
+  getFirestore, collection, doc, addDoc, getDoc, updateDoc, query, where, getDocs
+} from 'firebase/firestore';
+import {keys, sortBy, sortedUniq} from "lodash";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_ZCw0h8pHxRFFYOGHhoSoLz45L9rIT-g",
@@ -83,4 +86,31 @@ export async function getCompanyData(companyId) {
     throw new Error(`company id does not exist: ${companyId}`);
   }
   return docSnapshot.data();
+}
+
+export async function getPlayerScores(companyId) {
+  const playersCollection = collection(db, "players");
+  const q = query(playersCollection, where("companyId", "==", companyId));
+  let results = [];
+  let scores = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    const data = doc.data();
+    let score = 0;
+    for (let key of Object.keys(data)) {
+      if (key.startsWith("question-") && data[key]) {
+        score += 1;
+      }
+    }
+    results.push({
+      name: data.name,
+      score,
+    });
+    scores.push(score);
+  });
+  scores = sortedUniq(scores);
+  for (let result of results) {
+    result.place = scores.indexOf(result.score) + 1;
+  }
+  return sortBy(results, ["place", "name"]);
 }

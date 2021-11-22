@@ -100,7 +100,7 @@ export function Play() {
             Start the Game!
           </button>
         </div>
-        <Leaderboard />
+        <Leaderboard companyId={companyId} />
       </div>
     )
   }
@@ -111,7 +111,7 @@ export function Play() {
         <div className="Play--header">
           <p>Thanks for playing Trivia Town!</p>
         </div>
-        <Leaderboard />
+        <Leaderboard companyId={companyId} />
       </div>
     );
   }

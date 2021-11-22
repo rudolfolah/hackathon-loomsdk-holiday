@@ -1,4 +1,4 @@
-const Home = () => {
+export function Home() {
   return (
     <div>
       <h2>Welcome to Trivia Town!</h2>
@@ -6,5 +6,3 @@ const Home = () => {
     </div>
   );
 }
-
-export default Home;

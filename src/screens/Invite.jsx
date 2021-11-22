@@ -11,7 +11,7 @@ import "./Invite.css";
 const QUESTIONS_NOT_LOADED = 0;
 const ALL_QUESTIONS_RECORDED = -1;
 
-const Invite = () => {
+export function Invite() {
   const { companyId } = useParams();
   const [questionId, setQuestionId] = useState(QUESTIONS_NOT_LOADED);
   const [companyData, setCompanyData] = useState();
@@ -138,5 +138,3 @@ const Invite = () => {
     </div>
   );
 }
-
-export default Invite;

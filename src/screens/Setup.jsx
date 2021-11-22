@@ -1,25 +1,30 @@
-import {createCompanyData} from "../firebase";
 import {useState} from "react";
 
-const Setup = ({ baseUrl }) => {
+import {createCompanyData} from "../firebase";
+
+import "./Setup.css";
+import {Redirect} from "react-router-dom";
+
+export function Setup({ baseUrl }) {
   const [companyId, setCompanyId] = useState();
+  if (companyId) {
+    return (<Redirect to={`/setup/${companyId}`} />);
+  }
   const handleClick = () => {
     createCompanyData().then(companyId => {
       setCompanyId(companyId);
     });
   };
   return (
-    <div>
-      <div>
-        <button onClick={handleClick}>Set up new company</button>
+    <div className={"Setup--container"}>
+      <div className={"Setup--instructions"}>
+        <button
+          className={"Setup--button animate__animated animate__heartBeat animate__delay-3s"}
+          onClick={handleClick}
+        >
+          Set up new company
+        </button>
       </div>
-      {companyId &&
-       <div>
-         <div>Invite URL: http://{baseUrl}/invite/{companyId}</div>
-         <div>Play URL: http://{baseUrl}/play/{companyId}</div>
-       </div>}
     </div>
   );
 }
-
-export default Setup;

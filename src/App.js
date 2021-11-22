@@ -8,32 +8,34 @@ import {
 import "./firebase";
 import 'animate.css';
 import './App.css';
-import Setup from "./screens/Setup";
-import Home from "./screens/Home";
-import Invite from "./screens/Invite";
-import {Play} from "./screens/Play";
+import * as Screen from "./screens";
 import headerImage from "./header.png";
+
+// const baseUrl = "triviatown-123.s3bucket.example.org";
+const baseUrl = "localhost:3000";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-            <img height="300" alt="" src={headerImage} />
+          <img height="300" alt="" src={headerImage} />
         </header>
         <Switch>
+          <Route path="/setup/:companyId">
+            <Screen.Manage baseUrl={baseUrl} />
+          </Route>
           <Route path="/setup">
-            {/*<Setup baseUrl={"triviatown-123.s3bucket.example.org"} />*/}
-            <Setup baseUrl={"localhost:3000"} />
+            <Screen.Setup baseUrl={baseUrl} />
           </Route>
           <Route path="/invite/:companyId">
-            <Invite />
+            <Screen.Invite />
           </Route>
           <Route path="/play/:companyId">
-            <Play />
+            <Screen.Play />
           </Route>
           <Route path="/">
-            <Home />
+            <Screen.Home />
           </Route>
         </Switch>
       </div>
