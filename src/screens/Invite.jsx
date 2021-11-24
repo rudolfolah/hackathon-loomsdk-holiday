@@ -70,7 +70,7 @@ export function Invite() {
       <div>
         <div>
           <h3>Thank you!</h3>
-          <p>Thank you so much for recording a video for the Trivia Town game!</p>
+          <p>Thank you for using Loom, Trivia Town’s official Partner platform!</p>
         </div>
       </div>
     );
@@ -82,12 +82,17 @@ export function Invite() {
 
   return (
     <div>
-      <h2>Welcome to Trivia Town!</h2>
-      <p>Trivia Town is a fun way for your organization to interact remotely. It is powered by Loom.</p>
-      <p>You have been invited by someone at your organization to record a video!</p>
-      <p>Below is a prompt for a question or answer in the trivia game</p>
+      <h1>Welcome to Trivia Town Party! Howdy!</h1>
+      <h2>You have received an Invitation to Record your Trivia Town Question.</h2>
+      <h3>First things first - what is Trivia Town?</h3>
+      <p>Trivia Town has partnered with Loom video recording software to bring you a brand new way to play trivia games with your coworkers and friends!</p>
+      <p>What makes this game different? <strong>You do!</strong></p>
+      <p>Every person that you invite to the party will have to pre-record one of the special trivia questions we randomly select for you. Keep it classy or really have fun with it - it’s up to you!</p>
+      <p>All the recorded questions are added to your party, Trivia Party! </p>
       <div className="Invite--section-heading">
-        Get Busy Recording!
+        Let’s get busy recording your Trivia Town question!
+        <br/>
+        It’s easy, just follow the steps below!
       </div>
       <div className="Invite--steps-container">
         <div className="Invite--step">
@@ -95,15 +100,9 @@ export function Invite() {
             Step 1
           </div>
           <div className="Invite--step-description">
-            <p>Click here to start recording:</p>
-            <p>
-              <LoomRecord
-                label={"Start"}
-                onCancel={handleRecordingCanceled}
-                onComplete={handleRecordingCompleted}
-                onStart={handleRecordingStarted}
-              />
-            </p>
+            <p>Click Start Trivia Town to configure the Loom settings for ‘Camera Only’. <img alt="Settings to use for Loom recording" src={loomSettings} style={{ float: "right"}} /></p>
+            <p>Now is the time to check your microphone settings as well.</p>
+            <p>All done? Great! Now onto the fun part!</p>
           </div>
         </div>
         <div className="Invite--step">
@@ -111,30 +110,31 @@ export function Invite() {
             Step 2
           </div>
           <div className="Invite--step-description">
-            <p>Configure the recording settings to <em>capture the camera only</em></p>
-            <p>
-              <img alt="Settings to use for Loom recording" src={loomSettings} />
-            </p>
+            <p>Once you have configured Loom and are ready to record, you can press ‘Start Recording’.</p>
+            <p>A new page will appear with your unique trivia question. We have it all, from science and Hell’s Kitchen to Beyonce and the fear of bubble-wrap! We dare you to make it as fun as you can!</p>
+          </div>
+        </div>
+        <div className="Invite--step">
+          <div className="Invite--step-label">
+            Step 3
+          </div>
+          <div className="Invite--step-description">
+            <p>You’re done! Once enough of your party folks record their individual videos using Loom, you will receive an invite to  Play Trivia Town Party Game from the party host.</p>
+            <p>Next stop? Trivia Town!</p>
           </div>
         </div>
       </div>
-      <ol>
-        <li>
-          Click here to start recording:
-          <LoomRecord
-            label={"Start"}
-            onCancel={handleRecordingCanceled}
-            onComplete={handleRecordingCompleted}
-            onStart={handleRecordingStarted}
-          />
-        </li>
-        <li>
-          Configure the recording settings to <em>capture the camera only</em>
-          <img alt="Settings to use for Loom recording" src={loomSettings} />
-        </li>
-        <li>Press record</li>
-        <li>Read the prompt</li>
-      </ol>
+      <button className={"Invite--button-start"}>
+        Start Trivia Town
+        <br/>
+        Get Loom-ing!
+      </button>
+      <LoomRecord
+        label={"Start"}
+        onCancel={handleRecordingCanceled}
+        onComplete={handleRecordingCompleted}
+        onStart={handleRecordingStarted}
+      />
     </div>
   );
 }
