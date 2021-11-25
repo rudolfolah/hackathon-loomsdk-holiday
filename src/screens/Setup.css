@@ -16,14 +16,14 @@
 }
 
 .Setup--button {
-    background: var(--color-light-purple);
-    border: 1px solid var(--color-blue);
+    background: var(--color-purple);
+    border: 1px solid var(--color-light-purple);
     border-radius: 5px;
     padding: 32px;
     margin: 5px;
     font-size: 24pt;
     font-family: 'Fredoka One', sans-serif;
-    color: var(--color-yellow);
+    color: var(--color-orange);
     cursor: pointer;
 }
 
@@ -36,11 +36,12 @@
 
 .Setup--step {
     border: 2px solid var(--color-yellow);
-    background-color: var(--color-purple);
+    background-color: var(--color-blue);
     display: inline-flex;
     flex-direction: row;
     border-radius: 12px;
     margin-bottom: 20pt;
+    box-shadow: 1px 5px 11px var(--color-yellow);
 }
 
 .Setup--step-label {
@@ -53,7 +54,7 @@
 }
 
 .Setup--step:nth-child(1) .Setup--step-label {
-    color: var(--color-light-purple);
+    color: var(--color-yellow);
 }
 
 .Setup--step:nth-child(2) .Setup--step-label {
@@ -61,11 +62,11 @@
 }
 
 .Setup--step:nth-child(3) .Setup--step-label {
-    color: var(--color-orange);
+    color: var(--color-yellow);
 }
 
 .Setup--step:nth-child(4) .Setup--step-label {
-    color: var(--color-teal);
+    color: var(--color-green);
 }
 
 .Setup--step-description {

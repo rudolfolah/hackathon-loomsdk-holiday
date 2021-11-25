@@ -15,5 +15,20 @@
 }
 
 .App--footer {
+    margin-top: 100pt;
+    margin-bottom: 25pt;
+}
 
+.App--footer ul {
+    list-style: none;
+}
+
+.App--footer ul li {
+    display: inline-block;
+    margin: 10pt 5pt;
+}
+
+.App--footer a {
+    text-decoration: none;
+    color: #111111;
 }
