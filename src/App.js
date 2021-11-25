@@ -21,6 +21,7 @@ function App() {
         <header className="App-header">
           <img height="300" alt="" src={headerImage} />
         </header>
+        <section className="App--content">
         <Switch>
           <Route path="/invite/:companyId">
             <Screen.Invite />
@@ -38,14 +39,15 @@ function App() {
             <Screen.Setup baseUrl={baseUrl} />
           </Route>
         </Switch>
+        </section>
+        <footer className="App--footer">
+          <ul className="App--footer-nav">
+            <li><a href={"/about"}>About</a></li>
+            <li><a href={"/about"}>Contact Us</a></li>
+            <li><a href={"/about"}>Support</a></li>
+          </ul>
+        </footer>
       </div>
-      <footer className="App--footer">
-        <ul className="App--footer-nav">
-          <li><a href={"/about"}>About</a></li>
-          <li><a href={"/about"}>Contact Us</a></li>
-          <li><a href={"/about"}>Support</a></li>
-        </ul>
-      </footer>
     </Router>
   );
 }

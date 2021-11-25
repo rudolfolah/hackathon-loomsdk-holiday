@@ -1,3 +1,16 @@
+:root {
+  --color-red: rgb(245, 137, 146);
+  --color-teal: rgb(112, 217, 220);
+  --color-yellow: rgb(255, 222, 89);
+  --color-purple: rgb(53, 57, 154);
+  --color-light-purple: rgb(203, 108, 230);
+  --color-blue: rgb(0, 148, 212);
+  --color-green: rgb(164, 255, 89);
+  --color-orange: rgb(255, 139, 89);
+  --font-fun: 'Fredoka One', sans-serif;
+  --font-sans: 'Lato', sans-serif;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +18,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+  color: var(--color-purple);
 }
 
 code {

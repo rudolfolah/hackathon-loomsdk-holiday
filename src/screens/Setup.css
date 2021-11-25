@@ -1,11 +1,88 @@
+.Setup--container header {
+    text-align: center;
+}
+
+.Setup--container header h2 {
+    font-size: 36pt;
+}
+
+.Setup--container header h3 {
+    font-size: 32pt;
+}
+
+.Setup--container header p {
+    font-size: 16pt;
+    line-height: 1.5em;
+}
+
 .Setup--button {
-    background: #0094D4;
-    border: 1px solid #0094D4;
+    background: var(--color-light-purple);
+    border: 1px solid var(--color-blue);
     border-radius: 5px;
     padding: 32px;
     margin: 5px;
-    font-size: 32pt;
+    font-size: 24pt;
     font-family: 'Fredoka One', sans-serif;
-    color: #FFDE59;
+    color: var(--color-yellow);
     cursor: pointer;
+}
+
+.Setup--steps-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.Setup--step {
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-purple);
+    display: inline-flex;
+    flex-direction: row;
+    border-radius: 12px;
+    margin-bottom: 20pt;
+}
+
+.Setup--step-label {
+    font-family: var(--font-fun);
+    font-size: 32pt;
+    padding: 4pt;
+    margin: 16pt;
+    flex-basis: 12%;
+    flex-grow: 1;
+}
+
+.Setup--step:nth-child(1) .Setup--step-label {
+    color: var(--color-light-purple);
+}
+
+.Setup--step:nth-child(2) .Setup--step-label {
+    color: var(--color-green);
+}
+
+.Setup--step:nth-child(3) .Setup--step-label {
+    color: var(--color-orange);
+}
+
+.Setup--step:nth-child(4) .Setup--step-label {
+    color: var(--color-teal);
+}
+
+.Setup--step-description {
+    border-left: 2px solid var(--color-yellow);
+    color: #eee;
+    font-family: var(--font-sans);
+    font-size: 18pt;
+    padding: 8pt;
+    flex-grow: 1;
+    flex-basis: 60%;
+}
+
+.Setup--step-description p {
+    padding: 1pt;
+    margin: 5pt;
+}
+
+.Setup--cta {
+    align-self: center;
 }

@@ -2,4 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.App--header {
+
+}
+
+.App--content {
+
+}
+
+.App--footer {
+
 }
