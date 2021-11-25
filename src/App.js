@@ -22,23 +22,30 @@ function App() {
           <img height="300" alt="" src={headerImage} />
         </header>
         <Switch>
-          <Route path="/setup/:companyId">
-            <Screen.Manage baseUrl={baseUrl} />
-          </Route>
-          <Route path="/setup">
-            <Screen.Setup baseUrl={baseUrl} />
-          </Route>
           <Route path="/invite/:companyId">
             <Screen.Invite />
           </Route>
           <Route path="/play/:companyId">
             <Screen.Play />
           </Route>
+          <Route path="/scoreboard/:companyId">
+            <Screen.Scoreboard />
+          </Route>
+          <Route path="/setup/:companyId">
+            <Screen.Manage baseUrl={baseUrl} />
+          </Route>
           <Route path="/">
-            <Screen.Home />
+            <Screen.Setup baseUrl={baseUrl} />
           </Route>
         </Switch>
       </div>
+      <footer className="App--footer">
+        <ul className="App--footer-nav">
+          <li><a href={"/about"}>About</a></li>
+          <li><a href={"/about"}>Contact Us</a></li>
+          <li><a href={"/about"}>Support</a></li>
+        </ul>
+      </footer>
     </Router>
   );
 }
