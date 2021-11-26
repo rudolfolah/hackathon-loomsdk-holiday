@@ -6,6 +6,7 @@ import {useTrackOnce} from "../useTrackOnce";
 
 import "./Setup.css";
 import {Steps, Step} from "../components/Steps";
+import {PageHeader} from "../components/PageHeader";
 
 export function Setup() {
   useTrackOnce('Home page');
@@ -19,12 +20,12 @@ export function Setup() {
   };
   return (
     <div className={"Setup--container"}>
-      <header>
+      <PageHeader>
         <h2 className="animate__animated animate__pulse">Howdy folks! Welcome to Trivia Town!</h2>
         <p>Trivia Town has partnered with Loom video recording software to bring you a brand new way to play trivia games with your coworkers and friends!</p>
         <p>What makes this game different? You do! Every person that you invite to the party will have to pre-record one of the special trivia questions we randomly select for you. Keep it classy or really have fun with it - it’s up to you! All the recorded questions are added to your party, Trivia Party! </p>
         <h3 className="animate__animated animate__pulse animate__delay-1s">Setting up a New Trivia Town Party is as easy as 1, 2, 3, 4</h3>
-      </header>
+      </PageHeader>
       <Steps>
         <Step label={"Step 1"}>
           <p className="color__purple font__bold">Set-up your unique Trivia Party ID and management page.</p>

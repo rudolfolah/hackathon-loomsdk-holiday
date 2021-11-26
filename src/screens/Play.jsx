@@ -9,6 +9,7 @@ import Leaderboard from "../components/Leaderboard";
 import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
 
 import "./Play.css";
+import {PageHeader} from "../components/PageHeader";
 
 export function Play() {
   const { companyId } = useParams();
@@ -86,9 +87,10 @@ export function Play() {
   if (playerName === null || playerName === undefined) {
     return (
       <div className="Play--container">
-        <div className="Play--header">
-          <p>Welcome to Trivia Town! Compete with your coworkers in a fun trivia game!</p>
-        </div>
+        <PageHeader>
+          <h2>Welcome to Trivia Town!</h2>
+          <p>Compete with your coworkers in a fun trivia game!</p>
+        </PageHeader>
         <div className="Play--player-prompt">
           <label className="animate__animated animate__pulse">
             Enter your name:

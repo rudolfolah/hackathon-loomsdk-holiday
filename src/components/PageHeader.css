@@ -1,0 +1,21 @@
+.PageHeader--header {
+    padding: 1rem;
+    text-align: center;
+}
+
+.PageHeader--header h2 {
+    font-size: 30pt;
+    margin-bottom: 2rem;
+}
+
+.PageHeader--header h3 {
+    font-size: 20pt;
+    margin-top: 3rem;
+}
+
+.PageHeader--header p {
+    font-size: 14pt;
+    line-height: 2rem;
+    margin: 1rem;
+    width: 50%;
+}
