@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import mixpanel from 'mixpanel-browser';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+mixpanel.init('b7ed22d057ac648f4f7b8bf528c03b1b', { debug: true });
 
 ReactDOM.render(
   <React.StrictMode>

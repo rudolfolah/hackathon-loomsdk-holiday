@@ -1,18 +1,19 @@
-import {useState} from "react";
-import {Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import mixpanel from "mixpanel-browser";
 
 import {createCompanyData} from "../firebase";
+import {useTrackOnce} from "../useTrackOnce";
 
 import "./Setup.css";
 
 export function Setup({ baseUrl }) {
-  const [companyId, setCompanyId] = useState();
-  if (companyId) {
-    return (<Redirect to={`/setup/${companyId}`} />);
-  }
+  useTrackOnce('Home page');
+  let history = useHistory();
   const handleClick = () => {
+    mixpanel.track('Created new trivia party');
     createCompanyData().then(companyId => {
-      setCompanyId(companyId);
+      mixpanel.set_group('trivia_party', companyId);
+      history.push(`/setup/${companyId}`);
     });
   };
   return (
