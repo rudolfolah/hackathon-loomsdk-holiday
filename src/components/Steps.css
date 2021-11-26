@@ -1,0 +1,56 @@
+.Step--steps-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.Step--step {
+    background-color: var(--color-yellow);
+    border-radius: 12px;
+    border: 2px solid var(--color-light-purple);
+    box-shadow: 1px 5px 11px #aaa;
+    display: inline-flex;
+    flex-direction: row;
+    margin-bottom: 20pt;
+    width: 600px;
+}
+
+.Step--step-label {
+    flex-basis: 12%;
+    flex-grow: 1;
+    font-family: var(--font-fun);
+    font-size: 28pt;
+    margin: 16pt;
+    padding: 4pt;
+}
+
+.Step--step:nth-child(1) {
+    color: var(--color-blue);
+}
+
+.Step--step:nth-child(2) {
+    color: var(--color-light-purple);
+}
+
+.Step--step:nth-child(3) {
+    color: var(--color-blue);
+}
+
+.Step--step:nth-child(4) {
+    color: var(--color-light-purple);
+}
+
+.Step--step-description {
+    color: var(--color-purple);
+    flex-basis: 60%;
+    flex-grow: 1;
+    font-family: var(--font-sans);
+    font-size: 16pt;
+    padding: 0.5rem;
+}
+
+.Step--step-description p {
+    margin: 1rem;
+}
