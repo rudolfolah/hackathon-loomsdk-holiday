@@ -5,6 +5,7 @@
 
 .Setup--container header h2 {
     font-size: 30pt;
+    margin-bottom: 2rem;
 }
 
 .Setup--container header h3 {
@@ -20,6 +21,7 @@
 }
 
 .Setup--steps-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
     margin-left: 20%;
@@ -76,18 +78,18 @@
 }
 
 .Setup--cta {
-    align-self: center;
 }
 
 .Setup--button {
-    background: var(--color-purple);
-    border-radius: 5px;
-    border: 5px solid var(--color-orange);
+    background: var(--color-light-purple);
+    border-radius: 50px;
+    border: 5px solid var(--color-yellow);
     box-shadow: 0 5px 11px #111;
-    color: var(--color-orange);
+    color: var(--color-yellow);
     cursor: pointer;
-    font-family: 'Fredoka One', sans-serif;
-    font-size: 22pt;
+    font-family: var(--font-sans);
+    font-size: 18pt;
+    font-weight: bold;
     margin: 5px;
     padding: 32px;
 }
