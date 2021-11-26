@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import mixpanel from "mixpanel-browser";
 
 import loomSettings from "../loom-settings.png";
 import LoomRecord from "../components/LoomRecord";
@@ -7,12 +8,14 @@ import {Prompt} from "../components/Prompt";
 import {getCompanyData, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
 
 import "./Invite.css";
+import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
 
 const QUESTIONS_NOT_LOADED = 0;
 const ALL_QUESTIONS_RECORDED = -1;
 
 export function Invite() {
   const { companyId } = useParams();
+  useTrackTriviaPartyId(companyId, "Invite page");
   const [questionId, setQuestionId] = useState(QUESTIONS_NOT_LOADED);
   const [companyData, setCompanyData] = useState();
   const [showPrompt, setShowPrompt] = useState(false);
@@ -34,17 +37,17 @@ export function Invite() {
   }, [questionId, companyId]);
 
   const handleRecordingStarted = () => {
-    console.log("started recording");
+    mixpanel.track("Recording started");
     setShowPrompt(true);
   };
 
   const handleRecordingCanceled = () => {
-    console.log("canceled recording");
+    mixpanel.track("Recording canceled");
     setShowPrompt(false);
   }
 
   const handleRecordingCompleted = (loomVideoSharedUrl) => {
-    console.log("finished recording");
+    mixpanel.track("Recording finished");
     setCompanyQuestionLoomVideoSharedUrl(
       companyId,
       questionId,

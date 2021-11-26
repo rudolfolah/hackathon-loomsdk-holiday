@@ -1,14 +1,18 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import { shuffle } from "lodash";
+import mixpanel from "mixpanel-browser";
+
 import * as firebaseApi from "../firebase";
 import {LoomVideo} from "../components/LoomVideo";
+import Leaderboard from "../components/Leaderboard";
+import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
 
 import "./Play.css";
-import Leaderboard from "../components/Leaderboard";
 
 export function Play() {
   const { companyId } = useParams();
+  useTrackTriviaPartyId(companyId, "Play page");
   const [unconfirmedPlayerName, setUnconfirmedPlayerName] = useState("");
   const [playerName, setPlayerName] = useState();
   const [playerId, setPlayerId] = useState();
@@ -49,6 +53,7 @@ export function Play() {
   }, [playerName]);
 
   const handleAnswerClick = (answer) => {
+    mixpanel.track("Selected answer");
     const updatedQuestionsAndAnswers = [...questionsAndAnswers];
     updatedQuestionsAndAnswers[currentQuestionIndex].answer = answer;
     firebaseApi.setPlayerAnswer(
@@ -70,6 +75,7 @@ export function Play() {
       setPlayerName(unconfirmedPlayerName);
       setUnconfirmedPlayerName("");
       setPlayerId(playerId);
+      mixpanel.track("Player name is set");
     });
   };
 

@@ -3,9 +3,11 @@ import Leaderboard from "../components/Leaderboard";
 import loomSettings from "../loom-settings.png";
 
 import "./Manage.css";
+import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
 
 export function Manage({ baseUrl }) {
   const { companyId } = useParams();
+  useTrackTriviaPartyId(companyId, "Manage page");
   return (
     <div className={"Manage--container"}>
       <section>

@@ -6,7 +6,7 @@ import {useTrackOnce} from "../useTrackOnce";
 
 import "./Setup.css";
 
-export function Setup({ baseUrl }) {
+export function Setup() {
   useTrackOnce('Home page');
   let history = useHistory();
   const handleClick = () => {
