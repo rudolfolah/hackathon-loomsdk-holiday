@@ -14,17 +14,14 @@ export default function Leaderboard({ companyId }) {
   }, [companyId]);
   return (
     <div className="Leaderboard--container">
-      <header className="Leaderboard--header">
-        <h3>Leaderboard</h3>
-      </header>
       <section className="Leaderboard--content">
         {scores.map((line, index) => {
           return (
             <div
               key={`line-${index}`}
-              className="Leaderboard--line"
+              className={`Leaderboard--line Leaderboard--line-place-${line.place}`}
             >
-              <div className={`Leaderboard--line-place Leaderboard--line-place-${line.place}`}>
+              <div className="Leaderboard--line-place">
                 #{line.place}
               </div>
               <div className="Leaderboard--line-name">
@@ -36,6 +33,22 @@ export default function Leaderboard({ companyId }) {
             </div>
           )
         })}
+        <div className="Leaderboard--line">
+          <div className={`Leaderboard--line-place`}>
+          </div>
+          <div className="Leaderboard--line-name">
+          </div>
+          <div className="Leaderboard--line-score">
+          </div>
+        </div>
+        <div className="Leaderboard--line">
+          <div className={`Leaderboard--line-place`}>
+          </div>
+          <div className="Leaderboard--line-name">
+          </div>
+          <div className="Leaderboard--line-score">
+          </div>
+        </div>
       </section>
     </div>
   );

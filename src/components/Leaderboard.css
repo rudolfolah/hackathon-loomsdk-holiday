@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.Leaderboard--header {
-
-}
-
 .Leaderboard--content {
     display: flex;
     flex-direction: column;
@@ -14,47 +10,56 @@
     font-size: 18pt;
 }
 
-.Leaderboard--line
- {
-    width: 700px;
+.Leaderboard--line {
+    background-color: #eeeeee;
+    border: 1px solid var(--color-light-purple);
+    border-radius: 12px;
+    box-shadow: 1px 5px 11px var(--color-light-purple);
+    color: var(--color-light-purple);
     display: flex;
     flex-direction: row;
-    height: 64px;
-    background-color: rgba(210, 61, 61, 0.75);
-    color: white;
     font-weight: bold;
-    padding: 12pt;
     margin: 5pt;
-    border-radius: 12px;
+    padding: 6pt;
+    width: 700px;
+}
+
+.Leaderboard--line.Leaderboard--line-place-1,
+.Leaderboard--line.Leaderboard--line-place-2,
+.Leaderboard--line.Leaderboard--line-place-3 {
+    background-color: var(--color-yellow);
 }
 
 .Leaderboard--line-place {
-    flex-grow: 1;
-    text-align: left;
-    padding: 9pt 12pt 12pt 60pt;
     background-repeat: no-repeat;
-    background-size: 62px;
+    background-size: 48px;
+    flex-grow: 1;
+    padding: 9pt 12pt 12pt 60pt;
+    text-align: left;
 }
 
 .Leaderboard--line-name {
-    padding: 9pt 12pt;
     flex-grow: 3;
+    padding: 9pt 12pt;
 }
 
 .Leaderboard--line-score {
+    flex-grow: 1;
     padding: 9pt 12pt;
     text-align: right;
-    flex-grow: 1;
 }
 
-.Leaderboard--line-place-1 {
+.Leaderboard--line-place-1 .Leaderboard--line-place {
     background-image: url("../star-gold.png");
 }
 
-.Leaderboard--line-place-2 {
+.Leaderboard--line-place-2 .Leaderboard--line-place {
     background-image: url("../star-purple.png");
 }
 
-.Leaderboard--line-place-3 {
+.Leaderboard--line-place-3 .Leaderboard--line-place {
     background-image: url("../star-blue.png");
+}
+
+.Leaderboard--line:nth-child(1) {
 }
