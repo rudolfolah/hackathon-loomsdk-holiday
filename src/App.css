@@ -7,16 +7,17 @@
 }
 
 .App--header {
-
+    margin-bottom: 0.5rem;
 }
 
 .App--content {
-
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .App--footer {
-    margin-top: 100pt;
-    margin-bottom: 25pt;
+    margin-top: 15rem;
+    margin-bottom: 3rem;
 }
 
 .App--footer ul {
@@ -30,5 +31,11 @@
 
 .App--footer a {
     text-decoration: none;
+    font-weight: bold;
     color: #111111;
+}
+
+.App--footer li + li a:before {
+    content: ' | ';
+    padding: 1rem;
 }
