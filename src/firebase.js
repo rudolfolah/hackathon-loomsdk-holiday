@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, doc, addDoc, getDoc, updateDoc, query, where, getDocs
 } from 'firebase/firestore';
-import {keys, sortBy, sortedUniq} from "lodash";
+import {keys, reverse, sortBy, sortedUniq, uniq} from "lodash";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_ZCw0h8pHxRFFYOGHhoSoLz45L9rIT-g",
@@ -108,7 +108,10 @@ export async function getPlayerScores(companyId) {
     });
     scores.push(score);
   });
-  scores = sortedUniq(scores);
+  scores = uniq(scores);
+  scores.sort();
+  scores.reverse();
+  console.log(scores);
   for (let result of results) {
     result.place = scores.indexOf(result.score) + 1;
   }
