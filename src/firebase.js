@@ -2,7 +2,9 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, doc, addDoc, getDoc, updateDoc, query, where, getDocs, onSnapshot
 } from 'firebase/firestore';
-import {keys, reverse, sortBy, sortedUniq, uniq} from "lodash";
+import { sortBy, uniq } from "lodash";
+
+import { dataset } from "./dataset";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_ZCw0h8pHxRFFYOGHhoSoLz45L9rIT-g",
@@ -18,41 +20,7 @@ const db = getFirestore(app);
 
 export async function createCompanyData() {
   const companiesCollection = collection(db, "companies");
-  const doc = await addDoc(companiesCollection, {
-    "question-1": {
-      "alreadyTaken": false,
-      "loomVideoId": null,
-      "text": "What is the capital city of Canada?",
-      "correctAnswer": "Ottawa",
-      "incorrectAnswers": [
-        "Toronto",
-        "Vancouver",
-        "Montreal",
-      ],
-    },
-    "question-2": {
-      "alreadyTaken": false,
-      "loomVideoId": null,
-      "text": "Where is the Sea of Tranquility located?",
-      "correctAnswer": "The Moon",
-      "incorrectAnswers": [
-        "Mars",
-        "Earth",
-        "Jupiter",
-      ],
-    },
-    "question-3": {
-      "alreadyTaken": false,
-      "loomVideoId": null,
-      "text": "Question?",
-      "correctAnswer": "Correct answer",
-      "incorrectAnswers": [
-        "Wrong",
-        "Incorrect",
-        "Not correct",
-      ],
-    },
-  });
+  const doc = await addDoc(companiesCollection, dataset);
   return doc.id;
 }
 

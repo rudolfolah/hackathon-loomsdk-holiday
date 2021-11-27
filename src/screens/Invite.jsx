@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import mixpanel from "mixpanel-browser";
 
 import loomSettings from "../loom-settings.png";
+import loomInsertRecordingButton from "../loom-recording-button.png"
 import LoomRecord from "../components/LoomRecord";
 import {Prompt} from "../components/Prompt";
 import {getCompanyData, setCompanyQuestionAsTaken, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
@@ -126,9 +127,10 @@ export function Invite() {
         <Step label={"Step 2"}>
           <p>Once you have configured Loom and are ready to record, you can press ‘Start Recording’.</p>
           <p>A new page will appear with your unique trivia question. We have it all, from science and Hell’s Kitchen to Beyonce and the fear of bubble-wrap! We dare you to make it as fun as you can!</p>
+          <p>After you are finished recording, you can press 'Insert Recording'. <img alt="Loom button for inserting recording" src={loomInsertRecordingButton} style={{ float: "right"}} /></p>
         </Step>
         <Step label={"Step 3"}>
-          <p>You’re done! Once enough of your party folks record their individual videos using Loom, you will receive an invite to  Play Trivia Town Party Game from the party host.</p>
+          <p>You’re done! Once enough of your party folks record their individual videos using Loom, you will receive an invite to Play Trivia Town Party Game from the party host.</p>
           <p>Next stop? Trivia Town!</p>
         </Step>
         {questionId && <div><LoomRecord
