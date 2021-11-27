@@ -3,7 +3,8 @@ import { useEffect } from "react";
 
 import "./LoomRecord.css";
 
-const API_KEY = "639a4278-5bdb-456a-b4dc-b7e48cfccaa3";
+// const API_KEY = "639a4278-5bdb-456a-b4dc-b7e48cfccaa3"; // sandbox
+const API_KEY = "f995d206-3812-4418-a3d7-ba931c50d5c4"; // production
 const BUTTON_ID = "loom-sdk-button";
 
 export default function LoomRecord({ label, onCancel, onComplete, onStart }) {
@@ -37,6 +38,8 @@ export default function LoomRecord({ label, onCancel, onComplete, onStart }) {
       // see: https://dev.loom.com/docs/record-sdk/api#buttonemitterevents
       sdkButton.on("cancel", () => { onCancel(); });
       sdkButton.on("start", () => { onStart(); });
+    }).catch(e => {
+      console.error(e);
     });
   }, [onCancel, onComplete, onStart]);
 

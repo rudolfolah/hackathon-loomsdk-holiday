@@ -11,8 +11,8 @@ import './App.css';
 import * as Screen from "./screens";
 import headerImage from "./header.png";
 
-// const baseUrl = "triviatown-123.s3bucket.example.org";
-const baseUrl = "localhost:3000";
+const baseUrl = "trivia-town.s3-website-us-east-1.amazonaws.com";
+// const baseUrl = "localhost:3000";
 
 function App() {
   return (
