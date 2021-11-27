@@ -5,7 +5,7 @@ import mixpanel from "mixpanel-browser";
 import loomSettings from "../loom-settings.png";
 import LoomRecord from "../components/LoomRecord";
 import {Prompt} from "../components/Prompt";
-import {getCompanyData, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
+import {getCompanyData, setCompanyQuestionAsTaken, setCompanyQuestionLoomVideoSharedUrl} from "../firebase";
 
 import "./Invite.css";
 import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
@@ -13,7 +13,6 @@ import {PageHeader} from "../components/PageHeader";
 import {Steps, Step} from "../components/Steps";
 
 const QUESTIONS_NOT_LOADED = 0;
-const ALL_QUESTIONS_RECORDED = -1;
 
 export function Invite() {
   const { companyId } = useParams();
@@ -22,18 +21,31 @@ export function Invite() {
   const [companyData, setCompanyData] = useState();
   const [showPrompt, setShowPrompt] = useState(false);
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
+  const [showAllQuestionsRecorded, setShowAllQuestionsRecorded] = useState(false);
 
   useEffect(() => {
     async function retrieveQuestion() {
+      if (questionId) {
+        return;
+      }
+
       const companyData = await getCompanyData(companyId);
       setCompanyData(companyData);
+      let foundQuestionId;
       for (let key of Object.keys(companyData)) {
-        if (companyData[key].loomVideoId === null) {
-          setQuestionId(key);
-          return;
+        if (foundQuestionId) {
+          break;
+        }
+        if (!companyData[key].alreadyTaken && companyData[key].loomVideoId === null) {
+          foundQuestionId = key;
         }
       }
-      setQuestionId(ALL_QUESTIONS_RECORDED);
+      if (foundQuestionId === null || foundQuestionId === undefined) {
+        setShowAllQuestionsRecorded(true);
+        return;
+      }
+      await setCompanyQuestionAsTaken(companyId, foundQuestionId);
+      setQuestionId(foundQuestionId);
     }
     retrieveQuestion();
   }, [questionId, companyId]);
@@ -59,13 +71,17 @@ export function Invite() {
     });
   };
 
-  if (companyData && questionId === ALL_QUESTIONS_RECORDED) {
+  if (companyData === null || companyData === undefined) {
+    return (<div>Loading...</div>);
+  }
+
+  if (showAllQuestionsRecorded) {
     return (
       <div>
-        <div>
-          <h3>Sorry!</h3>
-          <p>All questions have been recorded already, thank you!</p>
-        </div>
+        <PageHeader>
+          <h2>Sorry!</h2>
+          <h3>All questions have been recorded already, thank you!</h3>
+        </PageHeader>
       </div>
     );
   }
@@ -74,8 +90,8 @@ export function Invite() {
     return (
       <div>
         <PageHeader>
-          <h3>Thank you!</h3>
-          <p>Thank you for using Loom, Trivia Town’s official Partner platform!</p>
+          <h2>Thank you!</h2>
+          <h3>Thank you for using Loom, Trivia Town’s official Partner platform!</h3>
         </PageHeader>
       </div>
     );
@@ -115,16 +131,13 @@ export function Invite() {
           <p>You’re done! Once enough of your party folks record their individual videos using Loom, you will receive an invite to  Play Trivia Town Party Game from the party host.</p>
           <p>Next stop? Trivia Town!</p>
         </Step>
-        <div>
-          <LoomRecord
-            label={"Start Trivia Town"}
-            onCancel={handleRecordingCanceled}
-            onComplete={handleRecordingCompleted}
-            onStart={handleRecordingStarted}
-          />
-        </div>
+        {questionId && <div><LoomRecord
+          label={"Start Trivia Town"}
+          onCancel={handleRecordingCanceled}
+          onComplete={handleRecordingCompleted}
+          onStart={handleRecordingStarted}
+        /></div>}
       </Steps>
-
     </div>
   );
 }
