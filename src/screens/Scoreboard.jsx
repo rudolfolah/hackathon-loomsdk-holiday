@@ -11,7 +11,7 @@ export function Scoreboard() {
       <PageHeader>
         <h2>Scoreboard</h2>
       </PageHeader>
-      <Leaderboard companyId={companyId} />
+      <Leaderboard companyId={companyId} realtime={true} />
     </div>
   );
 }

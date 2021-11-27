@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, doc, addDoc, getDoc, updateDoc, query, where, getDocs
+  getFirestore, collection, doc, addDoc, getDoc, updateDoc, query, where, getDocs, onSnapshot
 } from 'firebase/firestore';
 import {keys, reverse, sortBy, sortedUniq, uniq} from "lodash";
 
@@ -20,6 +20,7 @@ export async function createCompanyData() {
   const companiesCollection = collection(db, "companies");
   const doc = await addDoc(companiesCollection, {
     "question-1": {
+      "alreadyTaken": false,
       "loomVideoId": null,
       "text": "What is the capital city of Canada?",
       "correctAnswer": "Ottawa",
@@ -30,6 +31,7 @@ export async function createCompanyData() {
       ],
     },
     "question-2": {
+      "alreadyTaken": false,
       "loomVideoId": null,
       "text": "Where is the Sea of Tranquility located?",
       "correctAnswer": "The Moon",
@@ -40,6 +42,7 @@ export async function createCompanyData() {
       ],
     },
     "question-3": {
+      "alreadyTaken": false,
       "loomVideoId": null,
       "text": "Question?",
       "correctAnswer": "Correct answer",
@@ -51,6 +54,13 @@ export async function createCompanyData() {
     },
   });
   return doc.id;
+}
+
+export async function setCompanyQuestionAsTaken(companyId, questionId) {
+  const docRef = doc(db, "companies", companyId);
+  return updateDoc(docRef, {
+    [`${questionId}.alreadyTaken`]: true
+  });
 }
 
 export async function setCompanyQuestionLoomVideoSharedUrl(companyId, questionId, loomVideoSharedUrl) {
@@ -111,9 +121,40 @@ export async function getPlayerScores(companyId) {
   scores = uniq(scores);
   scores.sort();
   scores.reverse();
-  console.log(scores);
   for (let result of results) {
     result.place = scores.indexOf(result.score) + 1;
   }
   return sortBy(results, ["place", "name"]);
+}
+
+
+export function realtimeGetPlayerScores(companyId, callback) {
+  const playersCollection = collection(db, "players");
+  const q = query(playersCollection, where("companyId", "==", companyId));
+
+  onSnapshot(q, (querySnapshot) => {
+    let results = [];
+    let scores = [];
+    querySnapshot.docs.forEach(doc => {
+      const data = doc.data();
+      let score = 0;
+      for (let key of Object.keys(data)) {
+        if (key.startsWith("question-") && data[key]) {
+          score += 1;
+        }
+      }
+      results.push({
+        name: data.name,
+        score,
+      });
+      scores.push(score);
+    });
+    scores = uniq(scores);
+    scores.sort();
+    scores.reverse();
+    for (let result of results) {
+      result.place = scores.indexOf(result.score) + 1;
+    }
+    callback(sortBy(results, ["place", "name"]));
+  });
 }

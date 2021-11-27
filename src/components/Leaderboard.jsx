@@ -3,15 +3,21 @@ import {useEffect, useState} from "react";
 import * as firebaseApi from "../firebase";
 import "./Leaderboard.css";
 
-export default function Leaderboard({ companyId }) {
+export default function Leaderboard({ companyId, realtime }) {
   const [scores, setScores] = useState([]);
   useEffect(() => {
     async function retrieveScores() {
       const scores = await firebaseApi.getPlayerScores(companyId);
       setScores(scores);
     }
-    retrieveScores();
-  }, [companyId]);
+    if (realtime) {
+      firebaseApi.realtimeGetPlayerScores(companyId, (scores) => {
+        setScores(scores);
+      });
+    } else {
+      retrieveScores();
+    }
+  }, [companyId, realtime]);
   return (
     <div className="Leaderboard--container">
       <section className="Leaderboard--content">
