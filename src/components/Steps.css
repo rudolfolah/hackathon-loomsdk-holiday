@@ -48,9 +48,9 @@
     flex-grow: 1;
     font-family: var(--font-sans);
     font-size: 16pt;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 .Step--step-description p {
-    margin: 1rem;
+    margin: 1rem 0;
 }
