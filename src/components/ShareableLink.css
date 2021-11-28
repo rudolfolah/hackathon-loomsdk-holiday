@@ -1,6 +1,8 @@
 .ShareableLink {
-    display: flex;
     background: #eee;
+    border-radius: 2px;
+    box-shadow: 1px 5px 11px -3px #aaaaaa;
+    display: flex;
 }
 
 .ShareableLink--link-container {
@@ -12,12 +14,16 @@
 }
 
 .ShareableLink--link {
+    color: var(--color-blue);
     display: block;
+    font-family: var(--font-sans);
+    font-weight: bold;
     padding: 1rem;
+    text-decoration: none;
     word-break: break-all;
 }
 
 .ShareableLink--button {
-    border: 5px solid transparent;
     background: transparent;
+    border: 5px solid transparent;
 }
