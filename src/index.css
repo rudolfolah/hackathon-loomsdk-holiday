@@ -23,6 +23,10 @@
   font-weight: bold;
 }
 
+.display__flex {
+  display: flex;
+}
+
 * {
   margin: 0;
   padding: 0;
