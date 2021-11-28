@@ -23,7 +23,6 @@ export function Play() {
   useEffect(() => {
     async function retrieveQuestion() {
       const companyData = await firebaseApi.getCompanyData(companyId);
-      console.log(companyData);
       let questionsAndAnswersData = [];
       for (let key of Object.keys(companyData)) {
         if (companyData[key].loomVideoId !== null) {
@@ -46,9 +45,13 @@ export function Play() {
     }
     for (let i = 0; i < 4; i += 1) {
       setTimeout(() => {
-        document.getElementsByClassName(
+        const elements = document.getElementsByClassName(
           "Play--answer-item"
-        )[i].className = "Play--answer-item animate__animated animate__pulse";
+        );
+        if (elements[i] === null || elements[i] === undefined) {
+          return;
+        }
+        elements[i].className = "Play--answer-item animate__animated animate__pulse";
       }, 2000 + (i * 1000));
     }
   }, [playerName, currentQuestionIndex]);
@@ -59,9 +62,13 @@ export function Play() {
     updatedQuestionsAndAnswers[currentQuestionIndex].answer = answer;
 
     for (let i = 0; i < 4; i += 1) {
-      document.getElementsByClassName(
+      const elements = document.getElementsByClassName(
         "Play--answer-item"
-      )[i].className = "Play--answer-item";
+      );
+      if (elements[i] === null || elements[i] === undefined) {
+        return;
+      }
+      elements[i].className = "Play--answer-item";
     }
 
     firebaseApi.setPlayerAnswer(

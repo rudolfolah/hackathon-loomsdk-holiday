@@ -42,3 +42,12 @@
 .Invite--explanation p {
     width: 90%;
 }
+
+h2.Invite--heading {
+    margin-bottom: 1rem;
+}
+
+h3.Invite--heading {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}

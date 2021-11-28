@@ -107,14 +107,14 @@ export function Invite() {
     <div>
       <PageHeader>
         <h1>Welcome to Trivia Town Party! Howdy!</h1>
-        <h2>You have received an Invitation to Record your Trivia Town Question.</h2>
-        <h3>First things first - what is Trivia Town?</h3>
+        <h2 className={"Invite--heading"}>You have received an Invitation to Record your Trivia Town Question.</h2>
+        <h3 className={"Invite--heading"}>First things first - what is Trivia Town?</h3>
         <div className={"display__flex"}>
           <div className={"Invite--explanation"}>
             <p>Trivia Town has partnered with Loom video recording software to bring you a brand new way to play trivia games with your coworkers and friends!</p>
             <p>What makes this game different? <strong>You do!</strong></p>
             <p>Every person that you invite to the party will have to pre-record one of the special trivia questions we randomly select for you. Keep it classy or really have fun with it - it’s up to you!</p>
-            <p>All the recorded questions are added to your party, Trivia Party!</p>
+            <p>All the recorded questions are added to your party,<br/>Trivia Party!</p>
           </div>
           <div>
             <LoomVideo height={400} width={500} loomVideoSharedUrl={"https://www.loom.com/share/765c54d0f90546fd848eb7fb34458dcc"} />
