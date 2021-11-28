@@ -49,14 +49,21 @@ export function Play() {
         document.getElementsByClassName(
           "Play--answer-item"
         )[i].className = "Play--answer-item animate__animated animate__pulse";
-      }, 500 + (i * 300));
+      }, 2000 + (i * 1000));
     }
-  }, [playerName]);
+  }, [playerName, currentQuestionIndex]);
 
   const handleAnswerClick = (answer) => {
     mixpanel.track("Selected answer");
     const updatedQuestionsAndAnswers = [...questionsAndAnswers];
     updatedQuestionsAndAnswers[currentQuestionIndex].answer = answer;
+
+    for (let i = 0; i < 4; i += 1) {
+      document.getElementsByClassName(
+        "Play--answer-item"
+      )[i].className = "Play--answer-item";
+    }
+
     firebaseApi.setPlayerAnswer(
       playerId,
       questionsAndAnswers[currentQuestionIndex].question.id,
