@@ -40,8 +40,8 @@ function App() {
         <footer className="App--footer">
           <ul className="App--footer-nav">
             <li><Link to={"/"}>About</Link></li>
-            <li><Link to={"/"}>Contact Us</Link></li>
-            <li><Link to={"/"}>Customer Support</Link></li>
+            <li><a href={"https://forms.gle/TSx24u4RNyBuVe2A9"} target={"_blank"} rel={"noreferrer"}>Contact Us</a></li>
+            <li><a href={"https://forms.gle/TSx24u4RNyBuVe2A9"} target={"_blank"} rel={"noreferrer"}>Customer Support</a></li>
           </ul>
         </footer>
       </div>
