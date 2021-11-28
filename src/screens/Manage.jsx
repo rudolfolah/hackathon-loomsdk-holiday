@@ -32,7 +32,7 @@ export function Manage({ baseUrl }) {
           <p>Once they click the Record-Video Link, we will take them through the process of video recording their unique trivia question.</p>
           <p>And don’t forget to record one yourself! Done!</p>
           <p>Send out the <strong>Invitation to Record Video</strong>:</p>
-          <p><a href={`/invite/${companyId}`} target="_blank" className={"Manage--link"}>http://{baseUrl}/invite/{companyId}</a></p>
+          <p><a href={`/invite/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/invite/{companyId}</a></p>
         </Step>
         <Step label={"Step 3"}>
           <h2>You’re ready to start the Trivia Town Party Game!</h2>
@@ -40,13 +40,13 @@ export function Manage({ baseUrl }) {
           <p>As a host you get to decide when the time is just right to send out the link, based on the number of recordings.</p>
           <p>A tracker at the top of this page can help you make that call!</p>
           <p>Send out the <strong>Play Trivia Town Party Link</strong>:</p>
-          <p><a href={`/play/${companyId}`} target="_blank" className={"Manage--link"}>http://{baseUrl}/play/{companyId}</a></p>
+          <p><a href={`/play/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/play/{companyId}</a></p>
         </Step>
         <Step label={"Step 4"}>
           <h2>You’re ready to play the Trivia Town Party Game!</h2>
           <p>Now comes the easy part - play the game! The Trivia Town Party Scoreboard keeps track of all the brainiacs in your party!</p>
           <p><strong>Trivia Town Scoreboard</strong>:</p>
-          <p><a href={`/scoreboard/${companyId}`} target="_blank" className={"Manage--link"}>http://{baseUrl}/scoreboard/{companyId}</a></p>
+          <p><a href={`/scoreboard/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/scoreboard/{companyId}</a></p>
         </Step>
       </Steps>
     </div>

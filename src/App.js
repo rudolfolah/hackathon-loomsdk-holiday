@@ -2,7 +2,7 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route, Link
 } from "react-router-dom";
 
 import "./firebase";
@@ -10,9 +10,6 @@ import 'animate.css';
 import './App.css';
 import * as Screen from "./screens";
 import headerImage from "./header.png";
-
-const baseUrl = "trivia-town.s3-website-us-east-1.amazonaws.com";
-// const baseUrl = "localhost:3000";
 
 function App() {
   return (
@@ -33,18 +30,18 @@ function App() {
               <Screen.Scoreboard />
             </Route>
             <Route path="/setup/:companyId">
-              <Screen.Manage baseUrl={baseUrl} />
+              <Screen.Manage baseUrl={process.env.REACT_APP_BASE_URL} />
             </Route>
             <Route path="/">
-              <Screen.Setup baseUrl={baseUrl} />
+              <Screen.Setup />
             </Route>
           </Switch>
         </section>
         <footer className="App--footer">
           <ul className="App--footer-nav">
-            <li><a href={"/about"}>About</a></li>
-            <li><a href={"/about"}>Contact Us</a></li>
-            <li><a href={"/about"}>Customer Support</a></li>
+            <li><Link to={"/"}>About</Link></li>
+            <li><Link to={"/"}>Contact Us</Link></li>
+            <li><Link to={"/"}>Customer Support</Link></li>
           </ul>
         </footer>
       </div>
