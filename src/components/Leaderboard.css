@@ -61,5 +61,6 @@
     background-image: url("../star-blue.png");
 }
 
-.Leaderboard--line:nth-child(1) {
+.Leaderboard--line-extra {
+    color: #eeeeee;
 }

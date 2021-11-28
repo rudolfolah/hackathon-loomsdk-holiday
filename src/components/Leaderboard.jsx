@@ -39,20 +39,26 @@ export default function Leaderboard({ companyId, realtime }) {
             </div>
           )
         })}
-        <div className="Leaderboard--line">
+        <div className="Leaderboard--line Leaderboard--line-extra">
           <div className={`Leaderboard--line-place`}>
+            #100
           </div>
           <div className="Leaderboard--line-name">
+            Empty
           </div>
           <div className="Leaderboard--line-score">
+            0 points
           </div>
         </div>
-        <div className="Leaderboard--line">
+        <div className="Leaderboard--line Leaderboard--line-extra">
           <div className={`Leaderboard--line-place`}>
+            #100
           </div>
           <div className="Leaderboard--line-name">
+            Empty
           </div>
           <div className="Leaderboard--line-score">
+            0 points
           </div>
         </div>
       </section>
