@@ -1,0 +1,23 @@
+.ShareableLink {
+    display: flex;
+    background: #eee;
+}
+
+.ShareableLink--link-container {
+    flex-grow: 1;
+}
+
+.ShareableLink--button-container {
+    text-align: right;
+}
+
+.ShareableLink--link {
+    display: block;
+    padding: 1rem;
+    word-break: break-all;
+}
+
+.ShareableLink--button {
+    border: 5px solid transparent;
+    background: transparent;
+}

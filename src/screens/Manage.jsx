@@ -1,11 +1,10 @@
 import {useParams} from "react-router-dom";
-import Leaderboard from "../components/Leaderboard";
-import loomSettings from "../loom-settings.png";
 
 import "./Manage.css";
 import {useTrackTriviaPartyId} from "../useTrackTriviaPartyId";
 import {Steps, Step} from "../components/Steps";
 import {PageHeader} from "../components/PageHeader";
+import {ShareableLink} from "../components/ShareableLink";
 
 export function Manage({ baseUrl }) {
   const { companyId } = useParams();
@@ -21,7 +20,7 @@ export function Manage({ baseUrl }) {
         <Step label={"Step 1"}>
           <h2>You’re ready to set-up your Trivia Party!</h2>
           <p>This is your unique Trivia Town Party ID and management page URL link:</p>
-          <p><a href={`/setup/${companyId}`} className={"Manage--link"}>{companyId}</a></p>
+          <ShareableLink fullUrl={`${baseUrl}/setup/${companyId}`}>{companyId}</ShareableLink>
           <p>Please keep this URL link safe! As a party host you are in charge of this page so make sure not to lose it, or you will have to set-up a new Trivia Town Party. </p>
           <p>Is the link saved? Great! Let’s move on to the fun stuff!</p>
         </Step>
@@ -32,7 +31,7 @@ export function Manage({ baseUrl }) {
           <p>Once they click the Record-Video Link, we will take them through the process of video recording their unique trivia question.</p>
           <p>And don’t forget to record one yourself! Done!</p>
           <p>Send out the <strong>Invitation to Record Video</strong>:</p>
-          <p><a href={`/invite/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/invite/{companyId}</a></p>
+          <ShareableLink fullUrl={`${baseUrl}/invite/${companyId}`}>{baseUrl}/invite/{companyId}</ShareableLink>
         </Step>
         <Step label={"Step 3"}>
           <h2>You’re ready to start the Trivia Town Party Game!</h2>
@@ -40,13 +39,13 @@ export function Manage({ baseUrl }) {
           <p>As a host you get to decide when the time is just right to send out the link, based on the number of recordings.</p>
           <p>A tracker at the top of this page can help you make that call!</p>
           <p>Send out the <strong>Play Trivia Town Party Link</strong>:</p>
-          <p><a href={`/play/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/play/{companyId}</a></p>
+          <ShareableLink fullUrl={`${baseUrl}/play/${companyId}`}>{baseUrl}/play/{companyId}</ShareableLink>
         </Step>
         <Step label={"Step 4"}>
           <h2>You’re ready to play the Trivia Town Party Game!</h2>
           <p>Now comes the easy part - play the game! The Trivia Town Party Scoreboard keeps track of all the brainiacs in your party!</p>
           <p><strong>Trivia Town Scoreboard</strong>:</p>
-          <p><a href={`/scoreboard/${companyId}`} target="_blank" className={"Manage--link"}>{baseUrl}/scoreboard/{companyId}</a></p>
+          <ShareableLink fullUrl={`${baseUrl}/scoreboard/${companyId}`}>{baseUrl}/scoreboard/{companyId}</ShareableLink>
         </Step>
       </Steps>
     </div>
