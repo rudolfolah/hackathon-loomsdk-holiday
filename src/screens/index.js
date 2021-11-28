@@ -1,3 +1,4 @@
+export * from "./About";
 export * from "./Invite";
 export * from "./Manage";
 export * from "./Play";

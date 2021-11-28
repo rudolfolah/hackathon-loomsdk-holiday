@@ -20,6 +20,9 @@ function App() {
         </header>
         <section className="App--content">
           <Switch>
+            <Route path="/about">
+              <Screen.About />
+            </Route>
             <Route path="/invite/:companyId">
               <Screen.Invite />
             </Route>
@@ -39,7 +42,8 @@ function App() {
         </section>
         <footer className="App--footer">
           <ul className="App--footer-nav">
-            <li><Link to={"/"}>About</Link></li>
+            <li><Link to={"/"}>Trivia Town</Link></li>
+            <li><Link to={"/about"}>About</Link></li>
             <li><a href={"https://forms.gle/TSx24u4RNyBuVe2A9"} target={"_blank"} rel={"noreferrer"}>Contact Us</a></li>
             <li><a href={"https://forms.gle/TSx24u4RNyBuVe2A9"} target={"_blank"} rel={"noreferrer"}>Customer Support</a></li>
           </ul>
